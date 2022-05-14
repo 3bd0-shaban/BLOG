@@ -1,0 +1,31 @@
+<!-- Search input  -->
+<div class=" containersearch">
+    <div class="input-group mb-3 px-5 mt-4">
+        <input type="text" class="form-control searchinput" placeholder="Searching..">
+        <button class="btn btn-success col-2 searchbtn" type="submit"><i class="bi bi-search"></i></button>
+      </div>
+</div>
+
+<!-- dropdown menu  -->
+<div class="row mr-2">
+    <button class="btn col-6" href=""><i class="bi bi-cart-plus"></i></button>
+    <div class="cart col-6" > 
+        <!-- Cart Button -->
+        <button class="header_img dropdown-toggle d-inline"data-toggle="dropdown" aria-expanded="false" id="dropdownMenuLink"><img src="../Images/3bdo.jpg" alt=""></button>  
+        <ul class="dropdown-menu col-md-5 col-lg-2 text-right" aria-labelledby="dropdownMenuLink">
+            <button class="btn btn-success dropdown-item signinbtn" onclick="window.location.href='html files/signIn.html'">Sign In</button>
+            <li><a class="dropdown-item" href="#">View cart</a></li>
+            <li><a class="dropdown-item" href="/profile/">Your Acount</a></li>
+            <li><a class="dropdown-item" href="#">Orders</a></li>
+            <li><a class="dropdown-item" href="#">White List</a></li>
+            <li><a class="dropdown-item" href="#">Saved item</a></li>
+            <li><a class="dropdown-item" href="#">Your Address</a></li>
+            <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+            <div class="mt-5 dropdown-item darkmode">
+                <div id="switch">
+                    <div id="circle"></div>
+                </div>
+                <span>Dark Mode</span>
+            </div>
+        </ul>
+    </div>
