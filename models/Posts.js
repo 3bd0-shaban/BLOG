@@ -16,8 +16,7 @@ var postscema = new mongoose.Schema({
         required: true
     },
     image:{
-        data : Buffer,
-        contentType : String,
+        type:String,
     }
     // role: {type: String, default: "member"},
 });

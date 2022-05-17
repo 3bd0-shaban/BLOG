@@ -12,22 +12,26 @@ const postsmodel = require("../models/posts");
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, "Uploads");
+      cb(null, "./public/Uploads");
     },
     filename: (req, file, cb) => {
-      const fileName = file.fieldname + '-' + Date.now();
-      cb(null, fileName)
+    //   const fileName = file.fieldname + '-' + Date.now();
+      cb(null, Date.now() + file.originalname)
     }
   });
 
   const upload = multer({
     storage: storage,
+    limits: {
+        fieldSize: 1024 * 1024 * 3,
+      },
     fileFilter: (req, file, cb) => {
-        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/gif") {
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/gif" || file.mimetype == "image/webg") {
             cb(null, true);
         } else {
             cb(null, false);
-            return cb(new Error('Allowed only .png, .jpg, .jpeg and .gif'));
+            return cb(req.flash('error','Allowed only .png, .jpg, .jpeg and .gif,webp')
+            );
         }
     }
 });
@@ -41,9 +45,9 @@ const storage = multer.diskStorage({
 // const upload = multer({
 //     storage:Storage
 // }).single('testImage')
-route.post("/addpost", upload.single("image"),
+route.post("/addpost", upload.single('image'),
     (req, res) => {
-        const {title,author,description}=req.body;
+        const {title,author,description,image}=req.body;
         let errors = [];
         if(!title || !author || !description){
             req.flash('error','Please fill all fields');
@@ -53,10 +57,7 @@ route.post("/addpost", upload.single("image"),
                 title : req.body.title,
                 author:req.body.author,
                 description:req.body.description,
-                image : {
-                    data :  req.file.path,
-                    contentType :'image/png'
-                }
+                image: req.file.filename,
             });
             // res.json(productstore);
             console.log(req.body);
@@ -65,7 +66,7 @@ route.post("/addpost", upload.single("image"),
                 .save()
                 .then(result => {
                     req.flash('success','This Post Is Created Successfully');
-                    res.redirect('/addpost')
+                    res.redirect('/addpost');
                     // res.send(console.dir(req.files));
                 })
                 .catch(err => {
@@ -75,6 +76,33 @@ route.post("/addpost", upload.single("image"),
         }
     );
 
+    // route that handles edit view
+    route.get('/edit/:id', (req, res) => {
+        let posts =  postsmodel.findById(req.params.id);
+        res.render('editpost', { stylecss:'/css/mainpage.css',title:'Addpost',user: req.user,posts: posts });
+    });
+  
+    route.put('/:id',  (req, res) => {
+        req.posts =  postsmodel.findById(req.params.id);
+        let posts = req.posts;
+        posts.title = req.body.title;
+        posts.author = req.body.author;
+        posts.description = req.body.description;
+      
+        try {
+            posts =  posts.save();
+          //redirect to the view route
+          res.redirect(`/mainpage/${blog.slug}`);
+        } catch (error) {
+          console.log(error);
+          res.redirect(`/seblogs/edit/${blog.id}`, { blog: blog });
+        }
+      });
+      ///route to handle delete
+    route.delete('/:id', (req, res) => {
+        postsmodel.findByIdAndDelete(req.params.id);
+        res.redirect('/');
+    });
 
 
 

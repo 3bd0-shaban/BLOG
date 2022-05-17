@@ -4,20 +4,11 @@ const modelusers = require('../models/users');
 const postsmodel = require("../models/posts");
 
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
-// exports.homepage = (req, res) => {
-//     modelproductadd.find()
-//     .then((result) => {
-//         res.render("mainpage",{arrproduct:result,stylecss:"/css/mainpage.css",title:'BLOG'});
-//     })
-//     .catch((err) => {
-//         console.log(err);
-//     });
-// }
-// Result   = object inside mongodb
 
 exports.mainpage = (req,res)=>{
     postsmodel.find()
     .then((result) =>{
+        let posts =  postsmodel.find().sort({ timeCreated: 'desc' });
         res.render("mainpage",{posts:result,stylecss:'/css/mainpage.css',title:'BLOG',user: req.user});
     }).catch((err)=>{
         console.log(err);
