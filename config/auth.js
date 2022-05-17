@@ -18,7 +18,21 @@ module.exports = {
     }
     res.redirect('/');      
   },
-
+  premium: function(req, res, next) {
+    if ( req.user.plan === 'premium') {
+      return next();
+    }
+    req.flash('error_msg', 'Please log in as a admin or premium to view that resource');
+    res.redirect('/SignIn');
+  },
+  premiumoradmin: function(req, res, next) {
+    if ( req.user.plan === 'premium' || req.user.isAdmin) {
+      return next();
+    }
+    req.flash('error_msg', 'Please log in as a admin or premium to view that resource');
+    res.redirect('/SignIn');
+  },
+  
 //check if user is basic Or premium
   plan: function(req, res, next) {
     if (req.user.plan === "basic" || req.user.plan === 'premium') {

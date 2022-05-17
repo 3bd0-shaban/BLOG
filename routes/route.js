@@ -5,7 +5,7 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const services = require("../services/render");
 const modelproductadd = require("../models/products");
 // const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
-const { basicuser, premuimuser, ensureAuthenticated, forwardAuthenticated,plan } = require('../config/auth');
+const {ensureAuthenticated, forwardAuthenticated,plan,premium,admin,premiumoradmin } = require('../config/auth');
 
 
 //home route
@@ -13,7 +13,7 @@ route.get("/", function (req, res) {
     res.redirect("BLOG");
 })
 route.get("/BLOG", services.mainpage);
-route.get("/addpost",services.addpost)
+route.get("/addpost",ensureAuthenticated,premiumoradmin,services.addpost)
 route.get("/register",forwardAuthenticated, services.register);
 route.get("/signin",forwardAuthenticated, services.signin);
 route.get("/addproduct", services.addproduct);

@@ -15,7 +15,7 @@ exports.mainpage = (req,res)=>{
     })
 }
 exports.go_to_article = (req,res)=>{
-    modelproductadd.findById(req.params.id)
+    postsmodel.findById(req.params.id)
     .then((result) =>{
         res.render("article",{objposts:result,stylecss:'/css/mainpage.css',title:'BLOG',user: req.user});
     })
