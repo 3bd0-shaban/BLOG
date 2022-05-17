@@ -1,25 +1,53 @@
 <%- include("./partials/Head")  %> 
-<header>
-  <div class='container container-flex'>
-    <div class='site-title'>
-      <h1>Living The Social Life</h1>
-      <p class='subtitle'>A blog exploring minimalism in life.</p>
+<header class="fheader p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+        </form>
+
+        <div class="text-end">
+            <% if(typeof user != 'undefined') { %>
+                <a type="button" href="/logout" class="btn btn-warning">LOGOUT</a>
+                <% }else{ %> 
+                    <a type="button" href="/signin" class="btn btn-outline-light me-2">Login</a>
+                    <a type="button" href="/register" class="btn btn-warning">Sign-up</a>                
+                <% } %>
+        </div>
+      </div>
     </div>
-    <nav>
-      <ul>
-        <li> <a href='#' class='current-page'>Home</a> </li>
-        <li> <a href='#'>About Me</a> </li>
-        <li> <a href='#'>Recent Posts</a> </li>
-      </ul>
-    </nav>
-  </div>
-</header> 
+  </header>
+  <%- include("./partials/navbar") %> 
+
 <!-- header ends -->
 
 <!-- container starts -->
-<div class="container container-flex">
+<div class="container container-flex mt-5">
         <main role="main">
             
+            <% if(typeof user != 'undefined') { %>
+                <h1>Hellloooooo</h1>
+               <% if(user.plan == "basic"){%> 
+                <h1>Basic</h1>
+                <% }else{%> 
+                    <h1>Premium</h1>
+                <% } %> 
+            <a href="/logout">LOGOUT</a>
+            <% } %> 
+
+
             <article class="article-featured">
                 <h2 class="article-title">Finding simplicity in life</h2>
                 <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/life.jpg" alt="simple white desk on a white wall with a plant on the far right side" class="article-image">
@@ -27,19 +55,19 @@
                 <p class="article-body">Life can get complicated really quickly, but it doesn't have to be! There are many ways to simplify your life, a few of which we've explored in the past. This week we're taking a bit of a approach though, in how you can find simplicity in the life you already living.</p>
                 <a href="#" class="article-read-more">CONTINUE READING</a>
             </article>
-            
-            <article class="article-recent">
+            <% posts.forEach(item =>{ %> 
+              <article class="article-recent">
                 <div class="article-recent-main">
-                    <h2 class="article-title">Keeping cooking simple </h2>
-                    <p class="article-body">Food is a very important part of everyone's life. If you want to be healthy, you have to eat healthy. One of the easiest ways to do that is to keep your cooking nice and simple.</p>
-                    <a href="#" class="article-read-more">CONTINUE READING</a>
+                    <h2 class="article-title"><%= item.title %> </h2>
+                    <p class="article-body"><%= item.description %></p>
+                    <a href="/mainpage/<%= item._id %>" class="article-read-more">CONTINUE READING</a>
                 </div>
                 <div class="article-recent-secondary">
                     <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/food.jpg" alt="two dumplings on a wood plate with chopsticks" class="article-image">
                     <p class="article-info">July 19, 2019 | 3 comments</p>
                 </div>
             </article>
-            
+            <% }); %> 
             <article class="article-recent">
                 <div class="article-recent-main">
                     <h2 class="article-title">Simplicity and work </h2>
@@ -97,7 +125,6 @@
 <!-- footer starts -->
 <footer>
   <p><strong>Living the Simple Life</strong></p>
-  <p>Copyright 2021, <a href='akramnarejo.github.io' target='_blank'>Akram Narejo</a></p>
   
 </footer>
 <!-- footer ends -->

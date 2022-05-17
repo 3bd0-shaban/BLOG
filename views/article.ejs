@@ -1,0 +1,99 @@
+<%- include("./partials/Head")  %> 
+<header class="fheader p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+        </form>
+
+        <div class="text-end">
+            <% if(typeof user != 'undefined') { %>
+                <a type="button" href="/logout" class="btn btn-warning">LOGOUT</a>
+                <% }else{ %> 
+                    <a type="button" href="/signin" class="btn btn-outline-light me-2">Login</a>
+                    <a type="button" href="/register" class="btn btn-warning">Sign-up</a>                
+                <% } %>
+        </div>
+      </div>
+    </div>
+  </header>
+  <%- include("./partials/navbar") %> 
+
+<!-- header ends -->
+
+<!-- container starts -->
+<div class="container container-flex mt-5">
+        <main role="main">
+            
+            <% if(typeof user != 'undefined') { %>
+                <h1>Hellloooooo</h1>
+               <% if(user.plan == "basic"){%> 
+                <h1>Basic</h1>
+                <% }else{%> 
+                    <h1>Premium</h1>
+                <% } %> 
+            <a href="/logout">LOGOUT</a>
+            <% } %> 
+
+                
+            <article class="article-featured">
+                <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/life.jpg" alt="simple white desk on a white wall with a plant on the far right side" class="article-image">
+                <p class="article-info">July 23, 2019 | 3 comments</p>
+            </article>
+
+            <article class="article-recent">
+                <div class="article-recent-main">
+                    <h2 class="article-title mb-3">Simplicity and work </h2>
+                    <p class="article-body">Work is often a major source of stress. People get frustrated, it ruins their relationship with others and it leads to burnout. By keeping your work life as simple as possible, it will help balance everything out.</p>
+                </div>
+           
+            </article>
+        </main>
+        
+        <aside class="sidebar">
+            
+            <div class="sidebar-widget">
+                <h2 class="widget-title">ABOUT ME</h2>
+                <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/about-me.jpg" alt="john doe" class="widget-image">
+                <p class="widget-body">I find life better, and I'm happier, when things are nice and simple.</p>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h2 class="widget-title">RECENT POSTS</h2>
+                <div class="widget-recent-post">
+                    <h3 class="widget-recent-post-title">Keeping cooking simple</h3>
+                    <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/food.jpg" alt="two dumplings on a wood plate with chopsticks" class="widget-image">
+                </div>
+                <div class="widget-recent-post">
+                    <h3 class="widget-recent-post-title">Simplicity and work</h3>
+                    <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/work.jpg" alt="a chair white chair at a white desk on a white wall" class="widget-image">
+                </div>
+                <div class="widget-recent-post">
+                    <h3 class="widget-recent-post-title">Simple decorations</h3>
+                    <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/deco.jpg" alt="a green plant in a clear, round vase with water in it" class="widget-image">
+                </div>
+            </div>
+            
+        </aside>
+        
+    </div>
+<!-- container ends -->
+
+<!-- footer starts -->
+<footer>
+  <p><strong>Living the Simple Life</strong></p>  
+</footer>
+<!-- footer ends -->
+            <%- include("./partials/footer") %> 

@@ -1,0 +1,73 @@
+<%- include("./partials/Head")  %> 
+<body>
+    <%- include("./partials/Head")  %> 
+    <header class="fheader p-3 bg-dark text-white">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+              <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+            </a>
+    
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+              <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+            </ul>
+    
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+              <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+            </form>
+    
+            <div class="text-end">
+                <% if(typeof user != 'undefined') { %>
+                    <a type="button" href="/logout" class="btn btn-warning">LOGOUT</a>
+                    <% }else{ %> 
+                        <a type="button" href="/signin" class="btn btn-outline-light me-2">Login</a>
+                        <a type="button" href="/register" class="btn btn-warning">Sign-up</a>                
+                    <% } %>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <%- include("./partials/navbar") %> 
+
+      <%- include("./partials/messages") %> 
+
+      <!-- header ends -->
+    <div class="container" style="max-width: 1100px;">
+        <h1 class="mb-1 text-dark text-center mt-2">New blog post</h1>
+
+        <form action="addpost" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+
+                <label for="title" class="text-dark">Title :</label>
+                <input type="text" class="form-control" placeholder="Title" name="title" required>
+            </div>
+
+            <div class="form-group">
+
+                <label for="author" class="text-dark">Author :</label>
+                <input type="text" class="form-control" placeholder="Author" name="author" required>
+            </div>
+            <div class="form-group">
+
+                <label for="description" class="text-dark">Description :</label>
+                <textarea name="description" placeholder="Description" class="form-control" ></textarea>
+            </div>
+            <div class="form-group py-2">
+                <label for="image" class="text-dark">Upload image :</label>
+                <input type="file" name="image" id="image" class="form-control-file text-dark mt-2">
+            </div>
+
+            <div class="form-group">
+                <a href="/" class="btn btn-warning me-3">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({ selector: 'textarea' });</script>
+    <%- include("./partials/footer")  %> 

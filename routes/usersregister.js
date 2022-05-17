@@ -10,19 +10,11 @@ const services = require("../services/render");
 const modeluser = require('../models/users');
 const passport = require('passport');
 const controller = require('../controller/users_controller');
-const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
+const { basicuser, premuimuser,ensureAuthenticated,forwardAuthenticated,admin } = require('../config/auth');
+// const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
 
 
-
-// Login Page
-route.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
-
-// Register Page
-route.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
-
-
-// Login
 route.post('/login', (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/',
@@ -38,30 +30,8 @@ route.post('/login', (req, res, next) => {
 route.get('/logout', (req, res) => {
   req.logout();
   req.flash('success_msg', 'You are logged out');
-  res.redirect('/');
+  res.redirect('SignIn');
 });
-
-
-// const admin ={
-//   email:"admin@gmail.com",
-//   password :"123-456*"
-// }
-// route.post('/login', (req,res) => {
-//   const { email,passport } = req.body;
-//     let errors = [];
-
-//     if (!email || !password ) {
-//         errors.push({ msg: 'Please enter all fields' });
-//     }else{
-//       if (req.body.email == admin.email && req.body.passport == admin.password){
-//         res.render("mainpage",{stylecss:"/css/mainpage.css",title:'mingo'});
-//         req.seasion.users= req.body.email;
-//       }else{
-//         res.render("SignIn",{stylecss:"/css/mainpage.css",title:'mingo'});
-//       }
-//     }
-  
-// });
 
 
 
@@ -69,7 +39,7 @@ route.get('/logout', (req, res) => {
  *  @description Root Route
  *  @method GET /
  */
- route.get('/users', services.users);
+ route.get('/dashboard',admin, services.dashboard);
 
  /**
   *  @description add users

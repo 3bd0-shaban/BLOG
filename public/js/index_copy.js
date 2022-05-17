@@ -1,6 +1,4 @@
 
-
-
 $("#add_user").submit(function(event){
     alert("Data Inserted Successfully!");
 })
@@ -44,6 +42,23 @@ if(window.location.pathname == "/"){
                 location.reload();
             })
         }
-
     })
 }
+
+const btnelement=document.querySelector(".delete")
+    const btnid=btnelement.getAttribute("data-id");
+
+    // delete:'/users'
+
+    btnelement.addEventListener("click", (eo)=> {
+    let confirmaction = confirm("Are you sure you want to delete this user?")
+    if(confirmaction){
+        alert("User deleted ")
+        fetch(`/api/users/${ btnid}`, { method: "DELETE" } )
+        .then((response)=> response.json())
+        .then((data)=> window.location.href=data.delete)
+        .catch((err)=> {
+        console.log(err);
+        } );
+    }
+  } )

@@ -5,10 +5,10 @@ const { check, validationResult } = require('express-validator');
 // const { forwardAuthenticated } = require('../config/auth');
 // create and save new user
 exports.create = (req, res) => {
-    const { first_name, second_name, email, password, password2, phonenumber} = req.body;
+    const { first_name, second_name, email, password, password2, phonenumber,plan} = req.body;
     let errors = [];
 
-    if (!first_name || !second_name || !email || !password || !password2 || !phonenumber ) {
+    if (!first_name || !second_name || !email || !password || !password2 || !phonenumber || !plan ) {
         errors.push({ msg: 'Please enter all fields' });
     }
 
@@ -22,7 +22,7 @@ exports.create = (req, res) => {
 
     if (errors.length > 0) {
         res.render('register', {
-            stylecss:'/css/login.css', title: 'Rigster',errors,first_name,second_name,email,password,password2,phonenumber
+            stylecss:'/css/login.css', title: 'Rigster',errors,first_name,second_name,email,password,password2,phonenumber,plan
         });
     } else {
         users.findOne({ email: email }).then(user => {
@@ -30,11 +30,11 @@ exports.create = (req, res) => {
                 errors.push({ msg: 'Email already exists' });
                 res.render('register', {
                     stylecss:'/css/login.css', title: 'Rigster',
-                    errors,first_name,second_name,email,password,password2,phonenumber
+                    errors,first_name,second_name,email,password,password2,phonenumber,plan
                 });
             } else {
                 const newUser = new users({
-                    first_name,second_name,email,password,phonenumber,password2
+                    first_name,second_name,email,password,phonenumber,password2,plan
                 });
 
                 bcrypt.genSalt(10, (err, salt) => {
@@ -44,7 +44,7 @@ exports.create = (req, res) => {
                         newUser
                             .save()
                             .then(user => {
-                                req.flash('success_msg', 'You are now registered and can log in');
+                                req.flash('success', 'You are now registered and can log in');
                                 res.redirect('/SignIn');
                             })
                             .catch(err => console.log(err));
@@ -117,9 +117,10 @@ exports.delete = (req, res) => {
             if (!data) {
                 res.status(404).send({ message: `Cannot Delete with id ${id}. Maybe id is wrong` })
             } else {
-                res.send({
-                    message: "User was deleted successfully!"
-                })
+                res.json({delete:'/dashboard'})
+                // res.send({
+                //     message: "User was deleted successfully!"
+                // })
             }
         })
         .catch(err => {

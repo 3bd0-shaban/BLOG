@@ -27,11 +27,15 @@ var usersregister = new mongoose.Schema({
         type : String,
         required: true
     },
+    plan:{
+        type : String,
+        required: true,
+        default:"basic",
+        enum: ['basic', 'premium']
+    },
+    isAdmin:Boolean,
     // role: {type: String, default: "member"},
 },{timestamps:true});
-
-
-  
 
 const users = mongoose.model('users', usersregister);
 module.exports = users;

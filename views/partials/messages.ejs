@@ -9,8 +9,15 @@
     <% }); %>
 <% } %>
 
+<% success_msg.forEach(function(success_msg){ %>
+    <div class="alert alert-success alert-dismissible fade show text-start" role="alert">
+    <%= success_msg %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</button>
+</div>
+<% })%>
 
-<% if(locals.success_msg !='' ){ %>
+<% if(success_msg.lenght >0 ){ %>
         <div class="alert alert-success alert-dismissible fade show text-start" role="alert">
         <%= success_msg %>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

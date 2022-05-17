@@ -31,15 +31,23 @@
                             <input type="password" name="password" placeholder="Password" class="input" value="<% typeof password !='undefined' ? password : '' %>">
                     </div>
                  </div>
+                 
                  <div class="input-div one">
-                    <div class="div">
-                            <input type="password"name="password2" placeholder="Confirm Password" class="input" value="<% typeof password2 !='undefined' ? password2 : '' %>">
-                    </div>
-                 </div>
+                        <div class="div">
+                                <input type="password"name="password2" placeholder="Confirm Password" class="input" value="<% typeof password2 !='undefined' ? password2 : '' %>">
+                        </div>
+                </div>
                  <div class="input-div one">
                     <div class="div">
                             <input type="number" name="phonenumber" placeholder="Phone Number" class="input" value="<% typeof phonenumber !='undefined' ? phonenumber : '' %>">
                     </div>
+                 </div>
+                 <div class="row">
+                        <label for="rol" class="form-label col-2">Plan :</label>
+                        <select name="plan" class="form-select border col py-2" id="state" value="<%= typeof name != 'undefined' ? name : '' %>" >
+                                <option value="basic">Basic</option>
+                                <option value="premium" >Premium</option>
+                        </select>
                  </div>
             	<a href="#" class="my-3 a">Forgot Password?</a>
             	<input type="submit" class="btn" value="Sign UP">

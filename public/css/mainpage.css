@@ -62,12 +62,26 @@ strong {
 .article-info {
     margin: 2em 0;
 }
+
 header{
   padding: 2em 0;
   text-align: center;
   background: #f0f8ff;
   font-family: sans-serif;
   margin-bottom: 3em;
+}
+.fheader{
+  margin: 0;
+}
+.form-control-dark{
+  background-color: #212529;
+  color: #fff;
+  border:1px solid #7a828b;
+}
+.form-control-dark:focus{
+  background-color: #242627;
+  color: #fff;
+
 }
 .container-flex{
   max-width: 70vw;
@@ -98,7 +112,10 @@ nav a:focus{
   border-bottom: 1px solid black;
   transition: .3s ease;
 }
-
+form label {
+  font-weight: bold;
+  margin-top: 1rem;
+}
 img{
   max-width: 100%;
   display: block;

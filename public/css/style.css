@@ -102,7 +102,9 @@ table{
     font-size: 1.1em;
     margin: 0 .2em;
 }
-
+.delete{
+    cursor: pointer;
+}
 .table tr:hover{
     background-color:#06d6a0 ;
 }
