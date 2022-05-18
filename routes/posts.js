@@ -76,9 +76,10 @@ route.put('/:id',  (req, res) => {
     }
     });
     ///route to handle delete
-route.delete('/:id', (req, res) => {
-    Post.findByIdAndDelete(req.params.id);
-    res.redirect('/');
+route.post('/delete/:id', (req, res) => {
+    Post.findByIdAndDelete(req.params.id).then((result)=>{
+        res.redirect('/');
+    });
 });
 
 

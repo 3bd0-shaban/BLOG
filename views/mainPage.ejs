@@ -38,9 +38,9 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li><a class="dropdown-item" href="">Pin</a></li>
                                     <li><a class="dropdown-item" href="/edit/<%= item.id %> ">Edit</a></li>
-                                    <form action="/<%=item.id%>?_method=DELETE" method="POST">
+                                    <form action="/delete/<%=item.id%>" method="POST">
                                         <a >
-                                            <li><a class="dropdown-item" href="/<%=item.id%>?_method=DELETE">Delete</a></li>
+                                            <li><button class="dropdown-item" type="submit" >Delete</button></li>
                                         </a>
                                     </form>
                                 </ul>
