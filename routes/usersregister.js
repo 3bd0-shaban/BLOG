@@ -5,13 +5,10 @@ const bodyParser = require("body-parser");
 const { check, validationResult } = require('express-validator');
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const gravatar = require('gravatar');
-const bcrypt = require('bcryptjs');
 const services = require("../controller/render");
 const modeluser = require('../models/users');
 const passport = require('passport');
 const controller = require('../controller/users_controller');
-const { basicuser, premuimuser,ensureAuthenticated,forwardAuthenticated,admin } = require('../config/auth');
-// const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
 
 
@@ -33,18 +30,6 @@ route.get('/logout', (req, res) => {
   res.redirect('SignIn');
 });
 
-
-
-/**
- *  @description Root Route
- *  @method GET /
- */
- route.get('/dashboard',admin, services.dashboard);
-
- /**
-  *  @description add users
-  *  @method GET /add-user
-  */
  route.get('/add-user', services.add_user)
  
  /**

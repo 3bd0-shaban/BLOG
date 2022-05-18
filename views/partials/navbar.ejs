@@ -7,8 +7,11 @@
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li><a href='/' class="nav-link px-2 logo">BLOG</a></li>
-        <li><a href="#" class="nav-link px-2 text-white">About Me</a></li>
-        <li><a href="/addpost" class="nav-link px-2 text-white">Create</a></li>
+        <% if(typeof user != 'undefined') { %>
+          <% if(user.isAdmin){%> 
+           <li><a href="/dashboard" class="nav-link px-2 text-white">Dashboard</a></li>
+           <% } %> 
+       <% } %> 
       </ul>
 
       <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -28,24 +31,25 @@
 </header>
 <a href="#"><i class="fa-solid fa-circle-up up-arrow fa-3x"></i></a>
 
-<!-- the second Header -->
-<!-- <header style="margin-bottom: 0;">
-    <div class='container container-flex'>
-      <div class='site-title'>
-        <h1>Living The Social Life</h1>
-        <p class='subtitle'>A blog exploring minimalism in life.</p>
-      </div>
-      <nav>
-        <ul>
-          <li> <a href='/' class=''>Home</a> </li>
-          <li> <a href='#'>About Me</a> </li>
-          <li> <a href='#'>Recent Posts</a> </li>
-          <% if(typeof user != 'undefined') { %>
-          <li><a href="/logout">LOGOUT</a></li>
-          <% }else{ %> 
-              <li><a href="/signin">LOGIN</a></li>
-          <% } %> 
-        </ul>
-      </nav>
+
+<header style="margin-bottom: 0;">
+  <div class='container container-flex'>
+    <div class='site-title'>
+      <h1>Living The Social Life</h1>
+      <p class='subtitle'>A blog exploring minimalism in life.</p>
     </div>
-  </header>  -->
+    <nav>
+      <ul>
+        <li> <a href='/' class=''>Home</a> </li>
+        <li> <a href='/infulancer'>About Me</a> </li>
+        <li> <a href='/'>Recent Posts</a> </li>
+        <% if(typeof user != 'undefined') { %>
+          <% if(user.plan == "premium"){%> 
+           <li><a href="/addpost">Create</a></li>
+           <% } %> 
+       <% } %> 
+      </ul>
+    </nav>
+  </div>
+</header> 
+

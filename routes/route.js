@@ -3,8 +3,6 @@ const route = express.Router();
 const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const services = require("../controller/render");
-const modelproductadd = require("../models/products");
-// const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const {ensureAuthenticated, forwardAuthenticated,plan,premium,admin,premiumoradmin } = require('../config/auth');
 
 
@@ -13,17 +11,12 @@ route.get("/", function (req, res) {
     res.redirect("BLOG");
 })
 route.get("/BLOG", services.mainpage);
-route.get("/addpost",ensureAuthenticated,premiumoradmin,services.addpost)
+route.get("/addpost",ensureAuthenticated,premiumoradmin,services.addpost);
 route.get("/register",forwardAuthenticated, services.register);
 route.get("/signin",forwardAuthenticated, services.signin);
-// route.get("/addproduct", services.addproduct);
-// route.get("/cart", services.cart);
-route.get("/mainpage/category/:category", services.category);
-route.get("/profile", services.profile);
-// route.get("/search", services.seach);
-// route.get("/signupasseller", services.signupseller);
+route.get("/infulancer", services.infulancer);
+route.get("/dashboard",admin, services.dashboard);
 route.get("/mainpage/:id", services.go_to_article);
-// route.get("/seller_rigister",services.signupseller);
 
 
 module.exports = route

@@ -5,15 +5,12 @@ const bodyParser = require("body-parser");
 const session = require('express-session')
 const morgan = require('morgan');
 const cors = require('cors');
-const path = require('path');
 const logger = require('morgan');
-const dotenv = require('dotenv');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const passportLocalMongoose = require("passport-local-mongoose");
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
-const { basicuser, premuimuser, ensureAuthenticated, forwardAuthenticated } = require('./config/auth');
 const Post = require('./models/posts')
 
 const port = 3000;
@@ -29,18 +26,6 @@ app.use(express.static("public"));
 
 
 require('./config/passport')(passport);
-// app.use(ensureAuthenticated);
-
-// Express seasion middleware
-// app.use(session({
-//     secret: 'keyboard cat',
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: { secure: true }
-// }))
-
-
-
 
 // mongoose connect to database
 mongoose
@@ -78,20 +63,17 @@ app.use(function(req, res, next) {
     res.locals.error = req.flash('error');
     next();
 });
-// if(user.plan == "basic"){
 
-// }else(user.plan == "Premium"){
-    
-// }
 
-// app.use(function (req, res) {
-//     res.status(404).send("Sorry Not Found");
-// })
 app.use('/', require('./routes/route'));
 app.use('/', require('./routes/posts'));
-app.use('/', require('./routes/products'));
 app.use('/', require('./routes/usersregister'));
 
+
+
+app.use(function (req, res) {
+    res.status(404).send("Sorry Not Found");
+})
 // app.post('/delete/:id', (req, res) => {
 //     console.log("hello000000000000000000000000000000000000000000000000000000000000000000000000");
 //     Post.findByIdAndDelete(req.params.id);

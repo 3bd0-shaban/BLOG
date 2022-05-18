@@ -1,7 +1,9 @@
 
-const modelproductadd = require("../models/products");
+
+const axios = require('axios');
 const User = require('../models/users');
 const Post = require("../models/posts");
+const modelprofile = require("../models/infulancer")
 
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
@@ -32,43 +34,16 @@ exports.register = (req,res)=>{
 exports.signin = (req,res)=>{
     res.render("signIn",{stylecss:'/css/login.css',title:'sign in',success:req.flash('success')});
 }
-exports.cart = (req,res)=>{
-    modelproductadd.findById(req.params.id)
-    .then((result) =>{
-        res.render("cart",{objproduct:result, stylecss:'css/cart.css',title:'Cart'});
-    })
-    .catch((err) =>{
-        console.log(err);
-    })
-}
-exports.profile = (req,res)=>{
-    User.find()
+
+exports.infulancer = (req,res)=>{
+    modelprofile.find()
     .then((result) => {
-        res.render("PersonalProfile",{users : result.data, stylecss:'/css/personalProfile.css',title:'Profile'});
+        res.render("infulancer",{infulancer : result, stylecss:'/css/mainpage.css',title:'Infulancer',user: req.user});
     })
     .catch((err) => {
         console.log(err);
     });
 }
-exports.seach = (req,res)=>{
-    res.render("Searching",{stylecss:'css/Searching.css',title:'Searching......'});
-}
-exports.signupseller = (req,res)=>{
-    res.render("signupseller",{stylecss:'',title:'Sign Up For Sellers'});
-}
-exports.category = (req, res) => {
-    modelproductadd.find({category})
-    .then((result) => {
-        res.render("categories",{arrproduct:result,stylecss:"css/Searching.css",title:'Category'});
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-}
-
-
-//////////////////
-const axios = require('axios');
 
 
 exports.dashboard = (req, res) => {
@@ -81,8 +56,6 @@ exports.dashboard = (req, res) => {
         .catch(err =>{
             res.send(err);
         })
-
-    
 }
 
 exports.add_user = (req, res) =>{
@@ -98,16 +71,3 @@ exports.update_user = (req, res) =>{
             res.send(err);
         })
 }
-
-//////////////////
-exports.addproduct = (req,res)=>{
-    modelproductadd.find()
-    .then((result) =>{
-        res.render("AddProductSeller",{arrproduct:result});
-    })
-    .catch((err) =>{
-        console.log(err);
-    })
-}
-
-
