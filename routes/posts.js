@@ -19,11 +19,11 @@ const storage = multer.diskStorage({
         fieldSize: 1024 * 1024 * 3,
       },
     fileFilter: (req, file, cb) => {
-        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/gif" || file.mimetype == "image/webg") {
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/gif" || file.mimetype == "image/webg" || file.mimetype == "image/webp") {
             cb(null, true);
         } else {
             cb(null, false);
-            return cb(req.flash('error','Allowed only .png, .jpg, .jpeg and .gif,webp')
+            return cb(req.flash('error','Allowed only .png, .jpg, .jpeg and .gif .webg .webp')
             );
         }
     }
@@ -49,7 +49,7 @@ route.post("/addpost", upload.single('image'),
             storepost
                 .save()
                 .then(result => {
-                    req.flash('success','This Post Is Created Successfully');
+                    req.flash('success','Article Is Created Successfully');
                     res.redirect('/addpost');
                     // res.send(console.dir(req.files));
                 })
@@ -60,35 +60,37 @@ route.post("/addpost", upload.single('image'),
         }
     );
 
-    // route that handles edit view
-    route.get('/edit/:id', (req, res) => {
-        let posts =  postsmodel.findById(req.params.id);
-        res.render('editpost', { stylecss:'/css/mainpage.css',title:'Addpost',user: req.user,posts: posts });
+// route that handles edit view
+route.get('/edit/:id', (req, res) => {
+    postsmodel.findOneAndUpdate(req.params.id)
+    .then((result) => {
+        res.render('editpost', { stylecss:'/css/mainpage.css',title:'Addpost',user: req.user,posts: result });
+    }).catch((err) => {
+        console.log(err);
+    })
+});
+
+route.post('edit/:id',  (req, res,next) => {
+    const posts = postsmodel.findByIdAndUpdate(req.params.id,req.body)
+        posts
+        .save()
+        .then((result) => {
+        req.flash('success,"Article Updated Successfully');
+        // res.redirect('/edit/:_id');
+    }).catch((err) => {
+        req.flash('error,"Article can not update');
+        res.redirect('/edit/:_id');
+    })
+
     });
-  
-    route.put('/:id',  (req, res) => {
-        req.posts =  postsmodel.findById(req.params.id);
-        let posts = req.posts;
-        posts.title = req.body.title;
-        posts.author = req.body.author;
-        posts.description = req.body.description;
-      
-        try {
-            posts =  posts.save();
-          //redirect to the view route
-          res.redirect(`/mainpage/${blog.slug}`);
-        } catch (error) {
-          console.log(error);
-          res.redirect(`/seblogs/edit/${blog.id}`, { blog: blog });
-        }
-      });
-      ///route to handle delete
-      route.post('/delete/:id', (req, res) => {
-        Post.findByIdAndDelete(req.params.id).then((result)=>{
-            res.redirect('/');
-        });
+    ///route to handle delete
+    route.post('/delete/:id', (req, res) => {
+        postsmodel.findByIdAndDelete(req.params.id).then((result)=>{
+        req.flash('success,"Article deleted successfully');
+        res.redirect('/');
     });
-    
+});
+
 
 module.exports = route
 

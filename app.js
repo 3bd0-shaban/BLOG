@@ -71,10 +71,6 @@ app.use('/', require('./routes/usersregister'));
 
 
 
-app.use(function (req, res) {
-    res.status(404).send("Sorry Not Found");
-})
-// app.post('/delete/:id', (req, res) => {
-//     console.log("hello000000000000000000000000000000000000000000000000000000000000000000000000");
-//     Post.findByIdAndDelete(req.params.id);
-// });
+// app.use(function (req, res) {
+//     res.status(404).send("Sorry Not Found");
+// })

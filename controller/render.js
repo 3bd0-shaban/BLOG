@@ -5,12 +5,20 @@ const User = require('../models/users');
 const Post = require("../models/posts");
 const modelprofile = require("../models/infulancer")
 
-const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
+exports.infulancer = (req,res)=>{
+    modelprofile.findById("628311506093db5d625c736a")
+    .then((result) => {
+        res.render("infulancer",{objinfulancer:result, stylecss:'/css/mainpage.css',title:'Infulancer',user: req.user});
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+}
 exports.mainpage = (req,res)=>{
     Post.find()
     .then((result) =>{
-        let posts =  Post.find().sort({ timeCreated: 'desc' });
+        // let posts =  Post.find().sort({ timeCreated: 'desc' });
         res.render("mainpage",{posts:result,stylecss:'/css/mainpage.css',title:'BLOG',user: req.user});
     }).catch((err)=>{
         console.log(err);
@@ -34,17 +42,6 @@ exports.register = (req,res)=>{
 exports.signin = (req,res)=>{
     res.render("signIn",{stylecss:'/css/login.css',title:'sign in',success:req.flash('success')});
 }
-
-exports.infulancer = (req,res)=>{
-    modelprofile.find()
-    .then((result) => {
-        res.render("infulancer",{infulancer : result, stylecss:'/css/mainpage.css',title:'Infulancer',user: req.user});
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-}
-
 
 exports.dashboard = (req, res) => {
     // Make a get request to /api/users
