@@ -14,6 +14,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const { basicuser, premuimuser, ensureAuthenticated, forwardAuthenticated } = require('./config/auth');
+const Post = require('./models/posts')
 
 const port = 3000;
 app.use(morgan('dev'));
@@ -90,3 +91,8 @@ app.use('/', require('./routes/route'));
 app.use('/', require('./routes/posts'));
 app.use('/', require('./routes/products'));
 app.use('/', require('./routes/usersregister'));
+
+// app.post('/delete/:id', (req, res) => {
+//     console.log("hello000000000000000000000000000000000000000000000000000000000000000000000000");
+//     Post.findByIdAndDelete(req.params.id);
+// });

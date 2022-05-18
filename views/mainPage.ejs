@@ -8,7 +8,7 @@
 <div class="container container-flex mt-5">
         <main role="main">
             
-            <% if(typeof user != 'undefined') { %>
+            <!-- <% if(typeof user != 'undefined') { %>
                 <h1>Hellloooooo</h1>
                <% if(user.plan == "basic"){%> 
                 <h1>Basic</h1>
@@ -16,38 +16,44 @@
                     <h1>Premium</h1>
                 <% } %> 
             <a href="/logout">LOGOUT</a>
-            <% } %> 
+            <% } %>  -->
             <article class="article-featured">
                 <h2 class="article-title">Finding simplicity in life</h2>
-                <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/life.jpg" alt="simple white desk on a white wall with a plant on the far right side" class="article-image">
+                <img src="https://raw.githubusercontent.com/kevin-powell/reponsive-web-design-bootcamp/master/Module%202-%20A%20simple%20life/img/life.jpg"  class="pinned-image">
                 <p class="article-info">July 23, 2019 | 3 comments</p>
                 <p class="article-body">Life can get complicated really quickly, but it doesn't have to be! There are many ways to simplify your life, a few of which we've explored in the past. This week we're taking a bit of a approach though, in how you can find simplicity in the life you already living.</p>
                 <a href="#" class="article-read-more">CONTINUE READING</a>
+                <br><br>
             </article>
             <% posts.forEach(item =>{ %> 
               <article class="article-recent">
                 <div class="article-recent-main row">
-                    <h2 class="article-title col text-start p-0"><%= item.title %> </h2>
-                    <div class="dropdown me-auto col-1">
-                        <button class="btn " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-three-dots-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <li><a class="dropdown-item" href="/edit/<%= item.id %> ">Edit</a></li>
-                          <form action="/<%=item.id%>?_method=DELETE" method="POST">
-                            <a >
-                                <li><a class="dropdown-item" href="/<%=item.id%>?_method=DELETE">Delete</a></li>
-                            </a>
-                        </form>
-                        </ul>
-                      </div>
-                    <p class="article-body"><%- item.description %></p>
+                    <h4 class="article-title col text-start p-0"><%= item.title %> </h4>
+                    <% if(typeof user != 'undefined'){ %>
+                        <% if(user.isAdmin) { %>
+                            <div class="dropdown me-auto col-1">
+                                <button class="btn " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="">Pin</a></li>
+                                    <li><a class="dropdown-item" href="/edit/<%= item.id %> ">Edit</a></li>
+                                    <form action="/delete/<%=item.id%>" method="POST">
+                                        <a >
+                                            <li><button class="dropdown-item" type="submit" >Delete</button></li>
+                                        </a>
+                                    </form>
+                                </ul>
+                            </div>
+                        <% } %>
+                    <% } %>
+                    <div class="article-body row"><%- item.description %></div>
                     <a href="/mainpage/<%= item._id %>" class="article-read-more">CONTINUE READING</a>
 
 
                 </div>
                 <div class="article-recent-secondary">
-                    <img src="/uploads/<%= item.image %>" alt="two dumplings on a wood plate with chopsticks" class="article-image">
+                    <img src="/uploads/<%= item.image %>" class="article-image">
                     <p class="article-info"> <%= item.timeCreated %>| 3 comments</p>
                 </div>
             </article>

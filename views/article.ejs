@@ -20,8 +20,13 @@
 
                 
             <article class="article-featured">
-                <img src="/uploads/<%= objposts.image %>" alt="simple white desk on a white wall with a plant on the far right side" class="article-image">
-                <p class="article-info">July 23, 2019 | 3 comments</p>
+                <img src="/uploads/<%= objposts.image %>">
+                <div class="article-foot">
+                    <p class="article-info" style="display:inline-block">July 23, 2019 | 3 comments</p>
+                    <form action="" method="post">
+                        <i class="fa-regular fa-thumbs-up clicked fa-2x"></i>
+                    </form>
+                </div>
             </article>
 
             <article class="article-recent">
@@ -29,7 +34,6 @@
                     <h2 class="article-title mb-3"><%= objposts.title %> </h2>
                     <p class="article-body"><%- objposts.description %> </p>
                 </div>
-           
             </article>
         </main>
         
