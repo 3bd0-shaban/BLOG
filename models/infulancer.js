@@ -4,11 +4,9 @@ var infulancerschema = new mongoose.Schema({
     
     firstname : {
         type: String,
-        required: true,
     },
     secondname:{
         type : String,
-        required: true
     },
     image:{
         type:String,
@@ -31,7 +29,7 @@ var infulancerschema = new mongoose.Schema({
     company1:{
         type:String,
     },
-    company1:{
+    company2:{
         type:String,
     },
     company3:{
@@ -52,9 +50,24 @@ var infulancerschema = new mongoose.Schema({
     skill2:{
         type:String,
     },
-    skill2:{
+    skill3:{
         type:String,
     },
+    brefeinfo:{
+        type:String,
+    },
+    age:{
+        type:String,
+    },
+    availability:{
+        type:String,
+    },
+    expeyears:{
+        type:String,
+    },
+    livedin:{
+        type:String,
+    }
 });
 
 

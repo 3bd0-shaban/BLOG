@@ -1,12 +1,6 @@
 const express = require("express");
 const route = express.Router();
-const jwt = require('jsonwebtoken'); // to generate token
-const bodyParser = require("body-parser");
-const { check, validationResult } = require('express-validator');
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
-const gravatar = require('gravatar');
 const services = require("../controller/render");
-const modeluser = require('../models/users');
 const passport = require('passport');
 const controller = require('../controller/users_controller');
 

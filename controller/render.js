@@ -7,9 +7,9 @@ const modelprofile = require("../models/infulancer")
 
 
 exports.infulancer = (req,res)=>{
-    modelprofile.findById("628311506093db5d625c736a")
+    modelprofile.find()
     .then((result) => {
-        res.render("infulancer",{objinfulancer:result, stylecss:'/css/mainpage.css',title:'Infulancer',user: req.user});
+        res.render("infulancer",{infulancer:result, stylecss:'/css/mainpage.css',title:'Infulancer',user: req.user});
     })
     .catch((err) => {
         console.log(err);

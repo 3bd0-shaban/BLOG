@@ -6,22 +6,22 @@
 
 
 <div id="header">
-      <div class="container mt-3">
+  <% infulancer.forEach(info =>{ %>
+    <div class="container mt-3">
           <div class=" top-info row">
               <div class="col-8 col-md-3 circle-frame diviamge">
                 <img src="/Uploads/165275417314916518234543202.jpg" class="img-responsive profile-image">
               </div>
               <div class="col-12 col-md-5">
-                  <h1><%=objinfulancer.firstname %> </h1><br>
-                  <p>Art Tutor</p>
-                  <p><i>Stop the brain freeze.</i></p><br>
+                  <h1><%=info.firstname %> <%= info.secondname %>  </h1><br>
+                  <p><%= info.brefeinfo %> </p>
               </div>
               <div class=" col col-md-4 price-border me-auto">
                 <ul class="user-details">
-                  <li>Availability: Part-time (25 hr/wk)</li>
-                  <li>Age: 300</li>
-                  <li>Location: London, United Kingdom</li>
-                  <li>Years Exprience: 3</li>
+                  <li>Availability: <%= info.availability %></li>
+                  <li>Age: <%= info.age %></li>
+                  <li>Location: <%= info.livedin %></li>
+                  <li>Years Exprience: <%= info.expeyears %> years</li>
                 </ul>
                 <ul class="social-network social-circle">
                   <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
@@ -40,46 +40,46 @@
         <div class="row">
               <div class="col-md-8 main-info">
                 <div class="content"> 
-                  <h2>Experiences</h2><hr>
+                  <h2>Companies</h2><hr>
                   <div class="exper ms-5">
-                    <p class="h5 mt-5"><%= objinfulancer.company1 %> </p>
-                    <p class="h5 mt-5">Senior UI/UX Designer</p>
-                    <p class="h5 mt-5">Senior UI/UX Designer</p>
+                    <p class="h5 mt-5"><%=info.company1 %></p>
+                    <p class="h5 mt-5"><%=info.company2 %></p>
+                    <p class="h5 mt-5"><%=info.company3 %></p>
                   </div>
                 </div>
                     <div class="row mt-5 px-3">
                       <div class="skills col content me-2">
                           <h2>Skills</h2><hr>
                           <div class="exper ms-5">
-                            <p class="h5 mt-5">Senior UI/UX Designer</p>
-                            <p class="h5 mt-5">Senior UI/UX Designer</p>
-                            <p class="h5 mt-5">Senior UI/UX Designer</p>
+                            <p class="h5 mt-5"><%=info.skill1 %></p>
+                            <p class="h5 mt-5"><%=info.skill2 %></p>
+                            <p class="h5 mt-5"><%=info.skill3 %></p>
                           </div>
                       </div>
                       <div class="skills col content ms-2">
                         <h2>Awards</h2><hr>
                         <div class="exper ms-5">
-                          <p class="h5 mt-5">Senior UI/UX Designer</p>
-                          <p class="h5 mt-5">Senior UI/UX Designer</p>
-                          <p class="h5 mt-5">Senior UI/UX Designer</p>
+                          <p class="h5 mt-5"><%=info.award1 %></p>
+                          <p class="h5 mt-5"><%=info.award2 %></p>
+                          <p class="h5 mt-5"><%=info.award3 %></p>
                         </div>
                       </div>
                   </div>
                   <div class="content mt-5 mx-1"> 
                     <h2>Education</h2><hr>
                     <div class="exper ms-5">
-                      <p class="h5 mt-5">Senior UI/UX Designer</p>
-                      <p class="h5 mt-5">Senior UI/UX Designer</p>
-                      <p class="h5 mt-5">Senior UI/UX Designer</p>
+                      <p class="h5 mt-5"><%=info.education1 %></p>
+                      <p class="h5 mt-5"><%=info.education2 %></p>
+                      <p class="h5 mt-5"><%=info.education3 %></p>
                     </div>
                   </div>
                   <div class="row mt-5 px-3">
                     <div class="skills col-6 content me-2">
                         <h2>Language </h2><hr>
                         <div class="exper ms-5">
-                          <p class="h5 mt-5">Senior UI/UX Designer</p>
-                          <p class="h5 mt-5">Senior UI/UX Designer</p>
-                          <p class="h5 mt-5">Senior UI/UX Designer</p>
+                          <p class="h5 mt-5"><%=info.lang1 %></p>
+                          <p class="h5 mt-5"><%=info.lang2 %></p>
+                          <p class="h5 mt-5"><%=info.lang3 %></p>
                         </div>
                     </div>
                     <div style="height: 200px;"></div>
@@ -111,6 +111,8 @@
         </div>
     </div>
 </div>
+<% }); %> 
+
 <footer>
   <p><strong>Living the Simple Life</strong></p>
   
