@@ -23,5 +23,5 @@ var postscema = new mongoose.Schema({
 
 
 
-const posts = mongoose.model('posts', postscema);
-module.exports = posts;
+const Post = mongoose.model('Post', postscema);
+module.exports = Post;

@@ -1,4 +1,4 @@
-var users = require('../models/users');
+var User = require('../models/users');
 const bcrypt = require('bcryptjs');
 const bodyParser = require("body-parser");
 const { check, validationResult } = require('express-validator');
@@ -25,7 +25,7 @@ exports.create = (req, res) => {
             stylecss:'/css/login.css', title: 'Rigster',errors,first_name,second_name,email,password,password2,phonenumber,plan
         });
     } else {
-        users.findOne({ email: email }).then(user => {
+        User.findOne({ email: email }).then(user => {
             if (user) {
                 errors.push({ msg: 'Email already exists' });
                 res.render('register', {
@@ -33,7 +33,7 @@ exports.create = (req, res) => {
                     errors,first_name,second_name,email,password,password2,phonenumber,plan
                 });
             } else {
-                const newUser = new users({
+                const newUser = new User({
                     first_name,second_name,email,password,phonenumber,password2,plan
                 });
 
@@ -55,13 +55,13 @@ exports.create = (req, res) => {
     }
 }
 
-// retrieve and return all users/ retrive and return a single user
+// retrieve and return all User/ retrive and return a single user
 exports.find = (req, res) => {
 
     if (req.query.id) {
         const id = req.query.id;
 
-        users.findById(id)
+        User.findById(id)
             .then(data => {
                 if (!data) {
                     res.status(404).send({ message: "Not found user with id " + id })
@@ -74,7 +74,7 @@ exports.find = (req, res) => {
             })
 
     } else {
-        users.find()
+        User.find()
             .then(user => {
                 res.send(user)
             })
@@ -95,7 +95,7 @@ exports.update = (req, res) => {
     }
 
     const id = req.params.id;
-    users.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: `Cannot Update user with ${id}. Maybe user not found!` })
@@ -112,7 +112,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    users.findByIdAndDelete(id)
+    User.findByIdAndDelete(id)
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: `Cannot Delete with id ${id}. Maybe id is wrong` })
