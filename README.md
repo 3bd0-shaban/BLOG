@@ -1,15 +1,14 @@
-# E-Commerce-Website
-In this project, we are going to create E-Commerce-Website with express and mongodb.
-
+# Blog
+In this project, we are going to create  with express and mongodb.
+Elon musk added as enfulancer as an example for the blog
 #### To Run this project Clone it and install modules using
 ```
-npm install
+npm i
 ```
 
-Then Create config.env file and create PORT and MONGO_URI Variable and specify Value.
-That's it. You are ready to go. To execute this project just type
+then type node app 
 ```
-npm start
+node app
 ```
 
 Enjoy...!
