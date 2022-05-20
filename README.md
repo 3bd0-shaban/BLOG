@@ -11,4 +11,17 @@ then type node app
 node app
 ```
 
+You can access to Admin account by signing in using 
+
+```
+admin@gmail.com
+```
+```
+123-456*
+```
+this account is the only one who can access to dashboard 
+you access to it by clicking in dashboard in navbar that only shows for admin account 
+
+note that ! only admin and premium account can post in the blog
+
 Enjoy...!
